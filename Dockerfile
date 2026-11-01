@@ -1,0 +1,19 @@
+FROM python:3.12-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    HOST=0.0.0.0 \
+    PORT=8765
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY statechat ./statechat
+
+# run as a non-root user
+RUN useradd --create-home appuser
+USER appuser
+
+EXPOSE 8765
+CMD ["python", "-m", "statechat"]
