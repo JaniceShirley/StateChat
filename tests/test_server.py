@@ -52,3 +52,22 @@ async def _scenario():
 
 def test_end_to_end_chat():
     asyncio.run(_scenario())
+
+
+class _Peer:
+    def __init__(self, closed=False):
+        self.closed = closed
+        self.received = []
+
+    async def send(self, message):
+        if self.closed:
+            raise websockets.ConnectionClosed(None, None)
+        self.received.append(message)
+
+
+def test_broadcast_skips_disconnected_peer():
+    chat = ChatServer()
+    dead, alive = _Peer(closed=True), _Peer()
+    chat.rooms["dev"] = {dead, alive}
+    asyncio.run(chat.broadcast("dev", "alice: hi"))
+    assert alive.received == ["alice: hi"]

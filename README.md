@@ -79,7 +79,7 @@ Chatting before logging in, joining twice, duplicate names, unknown commands and
 python -m pytest -q
 ```
 
-17 tests cover the generic DFA, the lexer (valid and malformed commands), every legal and illegal session
+18 tests cover the generic DFA, the lexer (valid and malformed commands), every legal and illegal session
 transition, and an end-to-end test with two real WebSocket clients.
 
 ## Project layout
