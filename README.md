@@ -1,5 +1,7 @@
 # StateChat
 
+[![tests](https://github.com/JaniceShirley/StateChat/actions/workflows/tests.yml/badge.svg)](https://github.com/JaniceShirley/StateChat/actions/workflows/tests.yml)
+
 A small WebSocket chat server whose protocol is enforced by **deterministic finite automata (DFAs)**.
 Every rule, such as "you cannot chat before logging in" or "a command name is lowercase letters only",
 is an explicit entry in a transition table, not a pile of `if` statements.
