@@ -26,7 +26,11 @@ class ChatServer:
     async def broadcast(self, room, message, skip=None):
         for peer in list(self.rooms.get(room, ())):
             if peer is not skip:
-                await peer.send(message)
+                try:
+                    await peer.send(message)
+                except websockets.ConnectionClosed:
+                    # The peer dropped mid-broadcast; its own handler cleans it up.
+                    pass
 
     def _leave_room(self, ws, sess):
         members = self.rooms.get(sess.room)

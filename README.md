@@ -1,5 +1,7 @@
 # StateChat
 
+[![tests](https://github.com/JaniceShirley/StateChat/actions/workflows/tests.yml/badge.svg)](https://github.com/JaniceShirley/StateChat/actions/workflows/tests.yml)
+
 A small WebSocket chat server whose protocol is enforced by **deterministic finite automata (DFAs)**.
 Every rule, such as "you cannot chat before logging in" or "a command name is lowercase letters only",
 is an explicit entry in a transition table, not a pile of `if` statements.
@@ -79,7 +81,7 @@ Chatting before logging in, joining twice, duplicate names, unknown commands and
 python -m pytest -q
 ```
 
-17 tests cover the generic DFA, the lexer (valid and malformed commands), every legal and illegal session
+18 tests cover the generic DFA, the lexer (valid and malformed commands), every legal and illegal session
 transition, and an end-to-end test with two real WebSocket clients.
 
 ## Project layout
